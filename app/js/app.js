@@ -1,0 +1,1 @@
+var appEventos = angular.module('app', ['ngRoute', 'ngSanitize', 'textAngular', 'angularUtils.directives.dirPagination']);

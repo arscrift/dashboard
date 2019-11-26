@@ -1,0 +1,125 @@
+<div class="row mx-auto" ng-controller="ColaboradorController">
+	<!-- ALERTA -->
+	<div class="row mx-3 alert alert-warning" role="alert" ng-if="alerta.abrir">{{alerta.mensagem}}</div>
+	<!-- ALERTA -->
+	<div class="col-lg-6">
+		<form name="form-colaborador" id="form-colaborador" class="card mb-1" ng-submit="salvar(form)">
+			<div class="card-header">
+				<h4>Colaborador</h4>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="">Nome</label>
+					<input type="text" class="form-control" id="" placeholder="Nome" required="true" maxlength="50" ng-model="form.nome">
+				</div>
+				<div class="form-group">
+					<label for="">Descrição</label>
+					<textarea class="form-control" id="" placeholder="Descrição" required="true" maxlength="50" ng-model="form.descricao"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="imagem">Imagem</label>
+					<input type="file" class="form-control" id="imagem-colaborador">
+				</div>
+			</div>
+			<div class="card-footer">
+				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-colaborador.$valid"/>
+				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()"/>
+			</div>
+		</form>
+	</div>
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-header">
+				<div class="form-group">
+					<label for="">Filtrar</label>
+					<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
+				</div>
+			</div>
+			<table class="card-body table table-bordered table-hover text-center">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Imagem</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr dir-paginate="colaborador in colaboradores|filter:filtrar|itemsPerPage:2">
+						<th scope="row" class="align-middle" style="width: 150px">
+							<a ng-click="consultar(colaborador)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+							<a ng-click="excluir(colaborador)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
+						</th>
+						<td class="align-middle">{{colaborador.nome}}</td>
+						<td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{colaborador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="card-footer d-flex">
+				<dir-pagination-controls max-size="3" boundary-links="true" class="mx-auto" style="margin-top: 15px;"></dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
+<div class="row mx-auto" ng-controller="PatrocinadorController">
+	<!-- ALERTA -->
+	<div class="row mx-3 alert alert-warning" role="alert" ng-if="alerta.abrir">{{alerta.mensagem}}</div>
+	<!-- ALERTA -->
+	<div class="col-lg-6">
+		<form name="form-patrocinador" id="form-patrocinador" class="card mb-1" ng-submit="salvar(form)">
+			<div class="card-header">
+				<h4>Patrocinador</h4>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="">Nome</label>
+					<input type="text" class="form-control" id="" placeholder="Nome" required="true" ng-model="form.nome">
+				</div>
+				<div class="form-group">
+					<label for="">Descrição</label>
+					<textarea class="form-control" id="" placeholder="Descrição" required="true" ng-model="form.descricao"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="imagem">Imagem</label>
+					<input type="file" class="form-control" id="imagem-patrocinador">
+				</div>
+			</div>
+			<div class="card-footer">
+				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-patrocinador.$valid"/>
+				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()"/>
+			</div>
+		</form>
+	</div>
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-header">
+				<div class="form-group">
+					<label for="">Filtrar</label>
+					<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
+				</div>
+			</div>
+			<table class="card-body table table-bordered table-hover text-center">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Imagem</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr dir-paginate="patrocinador in patrocinadores|filter:filtrar|itemsPerPage:2">
+						<th scope="row" class="align-middle" style="width: 150px">
+							<a ng-click="consultar(patrocinador)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+							<a ng-click="excluir(patrocinador)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
+						</th>
+						<td class="align-middle">{{patrocinador.nome}}</td>
+						<td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{patrocinador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="card-footer d-flex">
+				<dir-pagination-controls max-size="3" boundary-links="true" class="mx-auto" style="margin-top: 15px;"></dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>

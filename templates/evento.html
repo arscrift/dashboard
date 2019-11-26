@@ -1,0 +1,83 @@
+<div class="row mx-1">
+	<div class="col-sm-12">
+		<form name="form-evento" id="form-evento" class="card mb-1" ng-submit="salvar(form)">
+			<div class="card-header">
+				<h4>Evento</h4>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="">Titulo</label>
+					<input type="text" class="form-control" id="" placeholder="Titulo" required="true" maxlength="50" ng-model="form.titulo">
+				</div>
+				<div class="form-group">
+					<label for="">Descrição</label>
+					<textarea class="form-control" id="" placeholder="Descrição" required="true" maxlength="50" ng-model="form.descricao"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="imagem-principal">Imagem Principal</label>
+					<input type="file" class="form-control" id="imagem-principal">
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3 col-sm-4">
+						<label for="">Quantidade de vagas</label>
+						<input type="number" class="form-control" id="" required="true" ng-model="form.quantidadeDeVagas">
+					</div>
+					<div class="form-group col-md-9 col-sm-8">
+						<label for="">URL do Google Maps</label>
+						<input type="text" class="form-control" id="" required="true" ng-model="form.urlDoGoogleMaps">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="">Corpo</label>
+					<text-angular id="" ng-model="form.corpo"></text-angular>
+				</div>
+				<div class="form-group">
+					<label for="">Categoria do evento</label>
+					<select class="form-control" id="" ng-model="form.categoria.idCategoria">
+						<option ng-repeat="categoria in categorias" value="{{categoria.idCategoria}}">{{categoria.nome}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="card-footer">
+				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-evento.$valid" />
+				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()" />
+			</div>
+		</form>
+	</div>
+	<!-- ALERTA -->
+	<div class="row mx-3 alert alert-warning" role="alert" ng-if="alerta.abrir">{{alerta.mensagem}}</div>
+	<!-- ALERTA -->
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="form-group">
+					<label for="">Filtrar</label>
+					<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
+				</div>
+			</div>
+			<table class="card-body table table-bordered table-hover text-center">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Titulo</th>
+						<th scope="col">Vagas</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr dir-paginate="evento in eventos|filter:filtrar|itemsPerPage:10">
+						<th scope="row" class="align-middle" style="width: 180px">
+							<a ng-href="#/ver-evento/{{evento.idEvento}}" class="btn btn-info text-light"><i class="fa fa-plus"></i></a>
+							<a ng-click="consultar(evento)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+							<a ng-click="excluir(evento)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
+						</th>
+						<td class="align-middle">{{evento.titulo}}</td>
+						<td class="align-middle">{{evento.quantidadeDeVagas}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="card-footer d-flex">
+				<dir-pagination-controls max-size="5" boundary-links="true" class="mx-auto" style="margin-top: 15px;"></dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>

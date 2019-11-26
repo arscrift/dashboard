@@ -1,0 +1,33 @@
+.app{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex
+}
+@media (max-width: 768px) {
+	.app{
+		display: block
+	}
+}
+
+#corpo{
+	width: 100%;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.card table{
+	margin-bottom: 0;
+}
+
+.card-header, .card-footer {
+	background-color: rgba(23, 162, 184, .7) !important;
+	color: #fff !important;
+}
+
+.form-control {
+	border: 1px solid rgb(35, 167, 153) !important;
+}
+
+.card {
+	border: 2px solid rgba(23, 162, 184, .7) !important;
+}

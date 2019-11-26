@@ -1,0 +1,71 @@
+<!-- ALERTA -->
+<div class="row mx-3 alert alert-warning" role="alert" ng-if="alerta.abrir">{{alerta.mensagem}}</div>
+<!-- ALERTA -->
+<div class="row mx-1">
+	<div class="col-lg-6 col-md-12">
+		<form name="form-administrador" id="form-administrador" class="card mb-1" ng-submit="salvar(form)">
+			<div class="card-header">
+				<h4>Administrador</h4>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="">Nome</label>
+					<input type="text" class="form-control" id="" placeholder="Nome" required="true" maxlength="50" ng-model="form.nome">
+				</div>
+				<div class="form-group">
+					<label for="">Usuário</label>
+					<input type="text" class="form-control" id="" placeholder="Usuário" required="true" maxlength="50" ng-model="form.usuario">
+				</div>
+				<div class="form-group">
+					<label for="">Senha</label>
+					<input type="password" class="form-control" id="" placeholder="Senha" required="true"  maxlength="15" ng-model="form.senha">
+				</div>
+                <div class="form-group">
+					<label for="">Repetir Senha</label>
+					<input type="password" class="form-control" id="" placeholder="Repetir Senha" required="true" maxlength="15" ng-model="form.senha2">
+				</div>
+				<div class="form-group">
+					<label for="foto">Foto</label>
+					<input type="file" class="form-control" id="foto">
+				</div>
+			</div>
+			<div class="card-footer">
+				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-administrador.$valid" />
+				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()" />
+			</div>
+		</form>
+	</div>
+	<br>
+	<div class="col-lg-6 col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="form-group">
+					<label for="">Filtrar</label>
+					<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
+				</div>
+			</div>
+			<table class="card-body table table-bordered table-hover text-center">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Foto</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr dir-paginate="administrador in administradores|filter:filtrar|itemsPerPage:4">
+						<th scope="row" class="align-middle" style="width: 150px">
+							<a ng-click="consultar(administrador)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+							<a ng-click="excluir(administrador)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
+						</th>
+						<td class="align-middle">{{administrador.nome}}</td>
+						<td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{administrador.foto}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="card-footer d-flex">
+				<dir-pagination-controls max-size="3" boundary-links="true" class="mx-auto" style="margin-top: 15px;"></dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>
