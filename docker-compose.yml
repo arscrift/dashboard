@@ -1,0 +1,64 @@
+version: '3.7'
+services:
+  web:
+    image: strund3r/arscrift-web
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+        failure_action: rollback
+      rollback_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+
+  dashboard:
+    image: strund3r/arscrift-dashboard
+    ports:
+      - "81:80"
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+        failure_action: rollback
+      rollback_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+
+  api:
+    image: strund3r/arscrift-api
+    ports:
+      - "8393:80"
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+        failure_action: rollback
+      rollback_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
