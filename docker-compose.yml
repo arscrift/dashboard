@@ -1,0 +1,107 @@
+version: '3.7'
+services:
+  web:
+    image: strund3r/arscrift-web:latest
+    networks:
+      - traefik-public
+      - default
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+        failure_action: rollback
+      rollback_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+      labels:
+        - traefik.frontend.rule=Host:arscrift.digital
+        #- traefik.frontend.rule=Host:www.arscrift.digital
+        - traefik.enable=true
+        - traefik.port=82
+        - traefik.tags=${TRAEFIK_PUBLIC_TAG:-traefik-public}
+        - traefik.docker.network=traefik-public
+        # Traefik service that listens to HTTP
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        # Traefik service that listens to HTTPS
+        - traefik.webservice.frontend.entryPoints=https
+
+  dashboard:
+    image: strund3r/arscrift-dashboard:latest
+    networks:
+      - traefik-public
+      - default
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+        failure_action: rollback
+      rollback_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+      labels:
+        - traefik.frontend.rule=Host:dashboard.arscrift.digital
+        - traefik.enable=true
+        - traefik.port=81
+        - traefik.tags=${TRAEFIK_PUBLIC_TAG:-traefik-public}
+        - traefik.docker.network=traefik-public
+        # Traefik service that listens to HTTP
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        # Traefik service that listens to HTTPS
+        - traefik.webservice.frontend.entryPoints=https
+
+  api:
+    image: strund3r/arscrift-api:latest
+    networks:
+      - traefik-public
+      - default
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+        failure_action: rollback
+      rollback_config:
+        parallelism: 2
+        delay: 10s
+        monitor: 2m
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+      labels:
+        - traefik.frontend.rule=Host:api.arscrift.digital
+        - traefik.enable=true
+        - traefik.port=8393
+        - traefik.tags=${TRAEFIK_PUBLIC_TAG:-traefik-public}
+        - traefik.docker.network=traefik-public
+        # Traefik service that listens to HTTP
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        # Traefik service that listens to HTTPS
+        - traefik.webservice.frontend.entryPoints=https
+
+networks:
+  traefik-public:
+    external: true
+  default:
+    external: false
