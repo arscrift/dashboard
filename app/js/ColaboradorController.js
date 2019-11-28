@@ -29,7 +29,7 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 		btn: 'Cadastrar'
 	}
 	
-	$http.get(`./restrito/colaborador/listar/${idEvento}`)
+	$http.get(`https://api.arscrift.digital/restrito/colaborador/listar/${idEvento}`)
 	.then((resposta)=>{
 		if(resposta.data.status == 500){
 			$scope.alerta.mensagem = resposta.data.message;
@@ -51,7 +51,7 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 	
 	$scope.salvar = (form)=>{
 		if($scope.operacao.alterar){
-			$http.put('./restrito/colaborador/alterar', form)
+			$http.put('https://api.arscrift.digital/restrito/colaborador/alterar', form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -72,7 +72,7 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 				}, 2500);
 			});
 		}else{
-			$http.post(`./restrito/colaborador/inserir/${idEvento}`, form)
+			$http.post(`https://api.arscrift.digital/restrito/colaborador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -110,7 +110,7 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 	}
 	
 	$scope.excluir = (colaborador)=>{
-		$http.delete(`./restrito/colaborador/deletar/${colaborador.idColaborador}`)
+		$http.delete(`https://api.arscrift.digital/restrito/colaborador/deletar/${colaborador.idColaborador}`)
 		.then((resposta)=>{
 			if(resposta.data.status == 500){
 				$scope.alerta.mensagem = resposta.data.message;

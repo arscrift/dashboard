@@ -23,7 +23,7 @@ appEventos.controller("NavegacaoController", function($rootScope, $scope, $http,
 	}
 
 	$rootScope.acessar = (usuario)=>{
-		$http.post('./acesso/acessar', usuario)
+		$http.post('https://api.arscrift.digital/acesso/acessar', usuario)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;

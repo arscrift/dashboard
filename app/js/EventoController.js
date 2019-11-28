@@ -26,7 +26,7 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('./restrito/evento/listar')
+	$http.get('https://api.arscrift.digital/restrito/evento/listar')
 	.then((resposta)=>{
 		if(resposta.data.status == 500){
 			$scope.alerta.mensagem = resposta.data.message;
@@ -46,7 +46,7 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 		}, 2500);
 	});
 	
-	$http.get('./restrito/categoria/listar')
+	$http.get('https://api.arscrift.digital/restrito/categoria/listar')
 	.then((resposta)=>{
 		if(resposta.data.status == 500){
 			$scope.alerta.mensagem = resposta.data.message;
@@ -70,7 +70,7 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 		console.log(form)
 		
 		if($scope.operacao.alterar){
-			$http.put('./restrito/evento/alterar', form)
+			$http.put('https://api.arscrift.digital/restrito/evento/alterar', form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -93,7 +93,7 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 		}else{
 			let idAdministrador = $rootScope.navegacao.perfil.idAdministrador;
 			
-			$http.post(`./restrito/evento/inserir/${idAdministrador}`, form)
+			$http.post(`https://api.arscrift.digital/restrito/evento/inserir/${idAdministrador}`, form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -131,7 +131,7 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 	}
 	
 	$scope.excluir = (evento)=>{
-		$http.delete(`./restrito/evento/deletar/${evento.idEvento}`)
+		$http.delete(`https://api.arscrift.digital/restrito/evento/deletar/${evento.idEvento}`)
 		.then((resposta)=>{
 			if(resposta.data.status == 500){
 				$scope.alerta.mensagem = resposta.data.message;
