@@ -7,16 +7,16 @@
 		<link rel="stylesheet" href="app/lib/bootstrap.min.css"/>
 		<link rel="stylesheet" href="app/css/nav.css"/>
 		<link rel="stylesheet" href="app/css/style.css"/>
-        <link rel="stylesheet" href="http://textangular.com/dist/textAngular.css" type="text/css">
+        <link rel="stylesheet" href="app/css/textAngular.css" type="text/css">
 		<link rel="shortcut icon" type="image/x-icon" href="https://www.friendshipcircle.org/wp-content/uploads/2016/09/fake-logo.png">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-		<title>Fatesg - Eventos</title>
+		<title>arscrift - Dashboard</title>
 		<script type="text/javascript" src="app/lib/angular.min.js"></script>
 		<script type="text/javascript" src="app/lib/angular-route.min.js"></script>
     <script type="text/javascript" src="app/lib/angular-sanitize.min.js"></script>
-    <script src='http://textangular.com/dist/textAngular-rangy.min.js'></script>
-  <script src='http://textangular.com/dist/textAngular-sanitize.min.js'></script>
-  <script src='http://textangular.com/dist/textAngular.min.js'></script>
+    <script src='app/lib/textAngular-rangy.min.js'></script>
+  <script src='app/lib/textAngular-sanitize.min.js'></script>
+  <script src='app/lib/textAngular.min.js'></script>
   <script type="text/javascript" src="app/lib/dirPagination.js"></script>
 </head>
 	
@@ -24,7 +24,7 @@
 		<div class="app" ng-controller="NavegacaoController">
 			<div id="sidenav" ng-if="navegacao.temAcesso">
 				<div class="logo">
-					<a href="#">Dashboard</a>
+					<a href="#!">Dashboard</a>
 					<div class="logo-perfil animated jello">
 						<img ng-src="data:image/jpeg;base64,{{navegacao.perfil.foto}}" alt="{{navegacao.perfil.nome}}" class="img-thumbnail foto-de-perfil">
 						<h4>{{navegacao.perfil.nome}}</h4>
@@ -34,13 +34,13 @@
 				</div>
 				<div class="menu" ng-class="{'open' : openMenu}">
 					<ul>
-						<li ng-class="{active: activetab == '/categoria'}" id="categoria"><a href="#/categoria">Controle de Categoria</a></li>
-						<li ng-class="{active: activetab == '/evento'}"><a href="#/evento">Controle de Evento</a></li>
-						<li ng-class="{active: activetab == '/presenca'}"><a href="#/presenca">Controle de Presenca</a></li>
-						<li ng-class="{active: activetab == '/administracao'}"><a href="#/administracao">Administração</a></li>
-						<li ng-class="{active: activetab == '/configuracao'}"><a href="#/configuracao">Configuração</a></li>
+						<li ng-class="{active: activetab == '/categoria'}" id="categoria"><a href="#!/categoria">Controle de Categoria</a></li>
+						<li ng-class="{active: activetab == '/evento'}"><a href="#!/evento">Controle de Evento</a></li>
+						<li ng-class="{active: activetab == '/presenca'}"><a href="#!/presenca">Controle de Presenca</a></li>
+						<li ng-class="{active: activetab == '/administracao'}"><a href="#!/administracao">Administração</a></li>
+						<li ng-class="{active: activetab == '/configuracao'}"><a href="#!/configuracao">Configuração</a></li>
                         <hr class="border-top border-light">
-						<li ng-click="fecharSessao()"><a href="#/acesso" class="btn btn-danger">Sair</a></li>
+						<li ng-click="fecharSessao()"><a href="#!/acesso" class="btn btn-danger">Sair</a></li>
 					</ul>
 				</div>
 			</div>
