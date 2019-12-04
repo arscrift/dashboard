@@ -22,17 +22,11 @@ services:
         constraints:
           - node.role == worker
       labels:
-        - traefik.frontend.rule=Host:arscrift.digital
-        #- traefik.frontend.rule=Host:www.arscrift.digital
-        - traefik.enable=true
-        - traefik.port=82
-        - traefik.tags=${TRAEFIK_PUBLIC_TAG:-traefik-public}
-        - traefik.docker.network=traefik-public
-        # Traefik service that listens to HTTP
-        - traefik.redirectorservice.frontend.entryPoints=http
-        - traefik.redirectorservice.frontend.redirect.entryPoint=https
-        # Traefik service that listens to HTTPS
-        - traefik.webservice.frontend.entryPoints=https
+        - "traefik.http.routers.web.rule=Host(`arscrift.digital`)"
+        - "traefik.http.routers.web.service=web"
+        - "traefik.http.services.web.loadbalancer.server.port=82"
+        - "traefik.http.routers.web.tls.certresolver=leresolver"
+        - "traefik.http.routers.web.entrypoints=websecure"
 
   dashboard:
     image: strund3r/arscrift-dashboard:latest
@@ -56,16 +50,11 @@ services:
         constraints:
           - node.role == worker
       labels:
-        - traefik.frontend.rule=Host:dashboard.arscrift.digital
-        - traefik.enable=true
-        - traefik.port=81
-        - traefik.tags=${TRAEFIK_PUBLIC_TAG:-traefik-public}
-        - traefik.docker.network=traefik-public
-        # Traefik service that listens to HTTP
-        - traefik.redirectorservice.frontend.entryPoints=http
-        - traefik.redirectorservice.frontend.redirect.entryPoint=https
-        # Traefik service that listens to HTTPS
-        - traefik.webservice.frontend.entryPoints=https
+        - "traefik.http.routers.dashboard.rule=Host(`dashboard.arscrift.digital`)"
+        - "traefik.http.routers.dashboard.service=dashboard"
+        - "traefik.http.services.dashboard.loadbalancer.server.port=81"
+        - "traefik.http.routers.dashboard.tls.certresolver=leresolver"
+        - "traefik.http.routers.dashboard.entrypoints=websecure"
 
   api:
     image: strund3r/arscrift-api:latest
@@ -89,16 +78,11 @@ services:
         constraints:
           - node.role == worker
       labels:
-        - traefik.frontend.rule=Host:api.arscrift.digital
-        - traefik.enable=true
-        - traefik.port=8393
-        - traefik.tags=${TRAEFIK_PUBLIC_TAG:-traefik-public}
-        - traefik.docker.network=traefik-public
-        # Traefik service that listens to HTTP
-        - traefik.redirectorservice.frontend.entryPoints=http
-        - traefik.redirectorservice.frontend.redirect.entryPoint=https
-        # Traefik service that listens to HTTPS
-        - traefik.webservice.frontend.entryPoints=https
+        - "traefik.http.routers.api.rule=Host(`api.arscrift.digital`)"
+        - "traefik.http.routers.api.service=api"
+        - "traefik.http.services.api.loadbalancer.server.port=8393"
+        - "traefik.http.routers.api.tls.certresolver=leresolver"
+        - "traefik.http.routers.api.entrypoints=websecure"
 
 networks:
   traefik-public:
